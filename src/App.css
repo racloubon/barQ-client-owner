@@ -37,3 +37,13 @@
 .category__listitem {
   font-style: italic;
 }
+
+.staff__name {
+  padding-top: 10px;
+  font-weight: bold;
+}
+
+.staff__email {
+  font-style: italic;
+}
+
