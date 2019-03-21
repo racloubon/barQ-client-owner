@@ -12,7 +12,8 @@ class Dashboard extends Component {
     super(props)
     this.state = {
       token: TOKEN,
-      ownerData: {}
+      ownerData: {},
+      activeBar: null
     }
   }
 
@@ -59,6 +60,10 @@ class Dashboard extends Component {
       })
   }
 
+  selectBar = (menus) => {
+    this.setState({activeBar: menus})
+  }
+
   componentDidMount = () => {
     this.getOwnerData()
   }
@@ -66,8 +71,8 @@ class Dashboard extends Component {
   render() {
     return (
       <div className="dashboard">
-        <BarList data={this.state.ownerData} addBar={this.addBar} deleteBar={this.deleteBar}/>
-        <BarDetails data={this.state.ownerData} />
+        <BarList data={this.state.ownerData} addBar={this.addBar} deleteBar={this.deleteBar} selectBar={this.selectBar}/>
+        <BarDetails data={this.state.activeBar} />
       </div>
     );
   }

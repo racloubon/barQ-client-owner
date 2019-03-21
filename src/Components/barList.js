@@ -10,7 +10,7 @@ class BarList extends Component {
     return (
       <div className="barList">
         <h1>My Bars</h1>
-        {this.props.data.bars ? this.props.data.bars.map((bar, i) => <BarListItem barData={bar} deleteBar={this.props.deleteBar} key={i} />) : null}
+        {this.props.data.bars ? this.props.data.bars.map((bar, i) => <BarListItem barData={bar} deleteBar={this.props.deleteBar} selectBar={this.props.selectBar} key={i} />) : null}
         <AddBarForm addBar={this.props.addBar}/>
       </div>
     );

@@ -1,6 +1,8 @@
 import React from 'react';
 import csv from 'csvtojson';
 
+import MenuListItem from './menuListItem';
+
 const convertToObject = (input) => {
   const categories = {};
   input.forEach((el) => {
@@ -87,9 +89,14 @@ class MenuContainer extends React.Component {
   }
 
   render() {
+
     const { json } = this.state;
+
     return (
       <div className="menuContainer">
+
+      {this.props.data ? this.props.data.map((item, i) => <MenuListItem key={i} data={item}/>) : null}
+
         <form>
           <input type="text" placeholder="Name" onChange={this.onChangeName} />
           <input type="file" name="file" onChange={this.onFileChange} />
