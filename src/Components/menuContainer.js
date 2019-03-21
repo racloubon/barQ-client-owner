@@ -94,7 +94,7 @@ class MenuContainer extends React.Component {
           <input type="text" placeholder="Name" onChange={this.onChangeName} />
           <input type="file" name="file" onChange={this.onFileChange} />
           <input type="submit" value="Submit" onClick={this.onSubmit} />
-          <input type="submit" value="Submit" onClick={this.onConfirm} />
+          <input type="submit" value="Confirm" onClick={this.onConfirm} />
         </form>
         <div>
           {this.renderMenu(json)}
