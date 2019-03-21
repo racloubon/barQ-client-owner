@@ -17,7 +17,7 @@ const SERVER_ADDRESS = `/owner/bars/${BAR_ID}/menus`;
 
 class MenuContainer extends React.Component {
   state = {
-    file: {},
+    file: null,
     json: [],
     menuName: '',
   }
@@ -36,6 +36,10 @@ class MenuContainer extends React.Component {
   onSubmit = (e) => {
     e.preventDefault();
     const { file } = this.state;
+    if (!file) {
+      alert('Error: Please ensure that you submit a csv file.'); // eslint-disable-line no-alert
+      return 1;
+    }
     const reader = new FileReader();
     reader.onload = () => {
       const binaryStr = reader.result;
@@ -51,11 +55,16 @@ class MenuContainer extends React.Component {
         });
     };
     reader.readAsBinaryString(file);
+    return 0;
   }
 
   onConfirm = async (e) => {
     e.preventDefault();
     const { json, menuName } = this.state;
+    if (json.length < 1 || menuName.length < 1) {
+      alert('Error: Please ensure that you submit both a menu and name.'); // eslint-disable-line no-alert
+      return 1;
+    }
     const newMenu = { name: menuName, categories: json };
     const result = await fetch(
       SERVER_ADDRESS, {
@@ -68,6 +77,7 @@ class MenuContainer extends React.Component {
       },
     );
     console.log('Response: ', result.status); // eslint-disable-line no-console
+    return 0;
   }
 
   renderMenu = (jsonMenu) => {
