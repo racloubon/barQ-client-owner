@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
-import './Styles/barDetails.css';
 
-import MenuContainer from './menuContainer'
-import StaffContainer from './staffContainer'
+import MenuContainer from './menuContainer';
+import StaffContainer from './staffContainer';
 
 class BarDetails extends Component {
   render() {
     return (
-      <div className="container">
-        <p>BarDetails</p>
+      <div className="barDetails">
+        <div>Menu Container</div>
         <MenuContainer />
+        <div>Staff Container</div>
         <StaffContainer />
       </div>
     );

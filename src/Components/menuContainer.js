@@ -20,7 +20,7 @@ const SERVER_ADDRESS = `http://localhost:${SERVER_PORT}/owner/bars/${BAR_ID}/men
 class MenuContainer extends React.Component {
   state = {
     file: {},
-    json: '',
+    json: [],
   }
 
   handleChange = (files) => {
@@ -49,29 +49,54 @@ class MenuContainer extends React.Component {
     reader.readAsBinaryString(file);
   }
 
-  onConfirm = () => {
+  onConfirm = async () => {
     const { json } = this.state;
-    const result = fetch(SERVER_ADDRESS, {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${TOKEN}`,
-        'Content-Type': 'application/json',
+    const result = await fetch(
+      SERVER_ADDRESS, {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${TOKEN}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(json),
       },
-      body: JSON.stringify(json),
-    });
+    );
     console.log(result);
+  }
+
+  onChangeName = () => {
+    console.log('added a name');
+  }
+
+  computeMenu = (jsonMenu) => {
+    const renderCategory = category => (
+      <div key={category.name}>
+        <div className="category__title">{category.name}</div>
+        {category.items.map(item => (
+          <div className="category__listitem" key={item.name}>
+            {`${item.name} ${Number(item.price).toFixed(2)}`}
+          </div>
+        ))}
+      </div>
+    );
+
+    const renderedMenu = jsonMenu.map(renderCategory);
+    return renderedMenu;
   }
 
   render() {
     const { json } = this.state;
     return (
-      <div className="Text Input">
+      <div className="menuContainer">
         <form>
+          <input type="text" placeholder="Name" onChange={this.onChangeName} />
           <input type="file" name="file" onChange={e => this.handleChange(e.target.files)} />
           <input type="submit" value="Submit" onClick={this.onSubmit} />
           <input type="submit" value="Confirm" onClick={this.onConfirm} />
         </form>
-        <div><p>{JSON.stringify(json)}</p></div>
+        <div>
+          {this.computeMenu(json)}
+        </div>
       </div>
     );
   }

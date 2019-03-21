@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './Styles/dashboard.css';
 
 import BarList from './barList';
 import BarDetails from './barDetails';
@@ -7,14 +6,12 @@ import BarDetails from './barDetails';
 class Dashboard extends Component {
   render() {
     return (
-      <div className="container">
+      <div className="dashboard">
         <BarList />
         <BarDetails />
       </div>
     );
   }
 }
-
-
 
 export default Dashboard;
