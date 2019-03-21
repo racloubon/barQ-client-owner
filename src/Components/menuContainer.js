@@ -67,7 +67,7 @@ class MenuContainer extends React.Component {
         body: JSON.stringify(newMenu),
       },
     );
-    console.log(result);
+    console.log('Response: ', result.status); // eslint-disable-line no-console
   }
 
   renderMenu = (jsonMenu) => {
