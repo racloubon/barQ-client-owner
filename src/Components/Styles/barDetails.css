@@ -1,0 +1,5 @@
+.container {
+  background-color: pink;
+  padding: 20px;
+  flex: 3;
+}

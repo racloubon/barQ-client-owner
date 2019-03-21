@@ -1,0 +1,6 @@
+.container {
+  background-color: yellow;
+  padding: 20px;
+  flex: 1;
+  flex-direction: vertical; 
+}
