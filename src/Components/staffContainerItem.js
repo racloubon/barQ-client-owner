@@ -1,12 +1,12 @@
 import React from 'react';
 
-const StaffContainerItem = ({ data }) => {
+const StaffContainerItem = ({ barId, data, deleteStaffMember }) => {
 
   return (
     <div>
       <h3>{data.name}</h3>
       <p>{data.email}</p>
-      <button>Delete</button>
+      <button onClick={() => deleteStaffMember(barId, data._id)}>Delete</button>
     </div>
   )
 }

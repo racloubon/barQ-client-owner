@@ -11,7 +11,7 @@ class BarDetails extends Component {
         <div>Menu Container</div>
         <MenuContainer data={this.props.data.menus} barId={this.props.data._id} />
         <div>Staff Container</div>
-        <StaffContainer data={this.props.data.staff} barId={this.props.data._id} />
+        <StaffContainer data={this.props.data.staff} barId={this.props.data._id} addStaffMember={this.props.addStaffMember} deleteStaffMember={this.props.deleteStaffMember} />
       </div>
     );
   }

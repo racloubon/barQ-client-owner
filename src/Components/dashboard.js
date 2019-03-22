@@ -13,14 +13,14 @@ class Dashboard extends Component {
     this.state = {
       token: TOKEN,
       ownerData: {},
-      activeBar: null
+      activeBar: null,
+      activeBarId: 'gnloHAqD8'
     }
   }
 
   getOwnerData = () => {
     fetch('http://localhost:3005/owner',
       {
-        method: 'GET',
         headers: {
           'Authorization': 'Bearer ' + this.state.token
         }
@@ -64,16 +64,47 @@ class Dashboard extends Component {
     this.setState({activeBar: barData})
   }
 
+  addStaffMember = (staff, barId) => {
+    fetch('http://localhost:3005/owner/bars/' + barId + '/staff', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${TOKEN}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(staff)
+    })
+      .then(response => response.json())
+      .then(response => this.setState({ ownerData: response, activeBar: response.bars.find(bar => bar._id === barId) }))
+  }
+
+  deleteStaffMember = (barId, staffId) => {
+    fetch('http://localhost:3005/owner/bars/' + barId + '/staff/' + staffId,
+      {
+        method: 'DELETE',
+        headers: {
+          'Authorization': 'Bearer ' + this.state.token
+        },
+      })
+      .then(response => {
+        const barToUpdate = this.state.ownerData.bars.find(bar => bar._id === barId)
+        const remainingStaff = barToUpdate.staff.filter(staff => staff._id !== staffId)
+        barToUpdate.staff = remainingStaff
+        this.setState({activeBar: barToUpdate})
+        this.getOwnerData()
+      })
+  }
+
   componentDidMount = () => {
     this.getOwnerData()
   }
 
+
+
   render() {
-    console.log('dashboard rerendering')
     return (
       <div className="dashboard">
         <BarList data={this.state.ownerData} addBar={this.addBar} deleteBar={this.deleteBar} selectBar={this.selectBar} />
-        {this.state.activeBar ? <BarDetails data={this.state.activeBar} /> : null}
+        {this.state.activeBar ? <BarDetails data={this.state.activeBar} addStaffMember={this.addStaffMember} deleteStaffMember={this.deleteStaffMember}/> : null}
       </div>
     );
   }
