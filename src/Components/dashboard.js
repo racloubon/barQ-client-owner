@@ -94,17 +94,52 @@ class Dashboard extends Component {
       })
   }
 
+  addMenu = (menu, barId) => {
+    fetch('http://localhost:3005/owner/bars/' + barId + '/menus',
+      {
+        method: 'POST',
+        headers: {
+          Authorization: 'Bearer ' + this.state.token,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(menu),
+      })
+      .then(response => response.json())
+      .then(response => {
+        console.log(response.bars.find(bar => bar._id === barId), 'active bar')
+        this.setState({ ownerData: response, activeBar: response.bars.find(bar => bar._id === barId) })
+      })
+  }
+
+  deleteMenu = (barId, menuId) => {
+
+    console.log('deleting menu', barId, menuId)
+
+    fetch('http://localhost:3005/owner/bars/' + barId + '/menus/' + menuId,
+      {
+        method: 'DELETE',
+        headers: {
+          'Authorization': 'Bearer ' + this.state.token
+        },
+      })
+      .then(response => {
+        const barToUpdate = this.state.ownerData.bars.find(bar => bar._id === barId)
+        const remainingMenus = barToUpdate.menus.filter(menu => menu._id !== menuId)
+        barToUpdate.menus = remainingMenus
+        this.setState({activeBar: barToUpdate})
+        this.getOwnerData()
+      })
+  }
+
   componentDidMount = () => {
     this.getOwnerData()
   }
-
-
 
   render() {
     return (
       <div className="dashboard">
         <BarList data={this.state.ownerData} addBar={this.addBar} deleteBar={this.deleteBar} selectBar={this.selectBar} />
-        {this.state.activeBar ? <BarDetails data={this.state.activeBar} addStaffMember={this.addStaffMember} deleteStaffMember={this.deleteStaffMember}/> : null}
+        {this.state.activeBar ? <BarDetails data={this.state.activeBar} addStaffMember={this.addStaffMember} deleteStaffMember={this.deleteStaffMember} addMenu={this.addMenu} deleteMenu={this.deleteMenu}/> : null}
       </div>
     );
   }
