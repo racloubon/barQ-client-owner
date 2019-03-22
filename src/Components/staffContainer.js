@@ -7,7 +7,6 @@ const TOKEN = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6Ik5qY3pOVEV6T1RKRE4wT
 
 
 class StaffContainer extends Component {
-
   state = {
     name: '',
     email: '',
@@ -32,29 +31,28 @@ class StaffContainer extends Component {
       alert('Error: Please ensure that you submit both a name and email.'); // eslint-disable-line no-alert
       return 1;
     }
-    fetch('http://localhost:3005/owner/bars/' + this.props.barId + '/staff', {
+    fetch(`/owner/bars/${this.props.barId}/staff`, {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${TOKEN}`,
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ name, email })
+      body: JSON.stringify({ name, email }),
     })
       .then(response => response.json())
-      .then(response => {
+      .then((response) => {
         const updatedStaff = response.bars.find(bar => bar._id === this.props.barId).staff;
-        this.setState({ staffData: updatedStaff })
-      })
+        this.setState({ staffData: updatedStaff });
+      });
   }
 
   render() {
-
-  console.log('staffContainer rerendering with:', this.props.data)
+    console.log('staffContainer rerendering with:', this.props.data);
 
     return (
       <div className="staffContainer">
 
-      {this.props.data ? this.props.data.map((staff, i) => <StaffContainerItem data={staff} key={i}/>) : null}
+        {this.props.data ? this.props.data.map((staff, i) => <StaffContainerItem data={staff} key={i} />) : null}
 
         <form>
           <input type="text" placeholder="Name" onChange={this.onChangeName} />
