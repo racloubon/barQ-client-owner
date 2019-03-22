@@ -1,13 +1,19 @@
 import React from 'react';
 
-const MenuListItemDetail = ({ data }) => {
+const MenuListItemDetail = ({ data }) => (
+  <div>
+    <h2>{data.name}</h2>
+    {data.items ? data.items.map(item => (
+      <div key={item.name}>
+        <h3>
+          {item.name}
+          : $
+          {item.price}
+        </h3>
 
-  return (
-    <div>
-      <h2>{data.name}</h2>
-      {data.items ? data.items.map((item, i) => <div key={i}><h3>{item.name}: ${item.price}</h3></div>) : null}
-    </div>
-  )
-}
+      </div>
+    )) : null}
+  </div>
+);
 
 export default MenuListItemDetail;

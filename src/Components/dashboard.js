@@ -12,42 +12,45 @@ class Dashboard extends Component {
   }
 
   getOwnerData = () => {
+    const { token, updateUser } = this.props;
     fetch('/owner/me',
       {
         method: 'GET',
         headers: {
-          Authorization: `Bearer ${this.props.token}`,
+          Authorization: `Bearer ${token}`,
         },
       })
       .then(res => res.json())
-      .then(res => this.props.updateUser(res.user));
+      .then(res => updateUser(res.user));
   }
 
   addBar = (event, bar) => {
+    const { token, updateUser } = this.props;
     event.preventDefault();
     fetch('/owner/bars',
       {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${this.props.token}`,
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(bar),
       })
       .then(res => res.json())
-      .then(res => this.props.updateUser(res.user));
+      .then(res => updateUser(res.user));
   }
 
   deleteBar = (id) => {
+    const { token, updateUser } = this.props;
     fetch(`/owner/bars/${id}`,
       {
         method: 'DELETE',
         headers: {
-          Authorization: `Bearer ${this.props.token}`,
+          Authorization: `Bearer ${token}`,
         },
       })
       .then(res => res.json())
-      .then(res => this.props.updateUser(res.user));
+      .then(res => updateUser(res.user));
   }
 
   selectBar = (barData) => {
@@ -59,17 +62,25 @@ class Dashboard extends Component {
   }
 
   render() {
-    const { logout } = this.props;
+    const { logout, user, token } = this.props;
+    const { activeBar } = this.state;
     return (
       <div className="dashboard">
         <button type="submit" onClick={logout}>Log out</button>
         <BarList
-          data={this.props.user}
+          data={user}
           addBar={this.addBar}
           deleteBar={this.deleteBar}
           selectBar={this.selectBar}
         />
-        {this.state.activeBar ? <BarDetails data={this.state.activeBar} /> : null}
+        {activeBar
+          ? (
+            <BarDetails
+              data={activeBar}
+              token={token}
+            />
+          )
+          : null}
       </div>
     );
   }

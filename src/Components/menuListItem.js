@@ -1,15 +1,12 @@
 import React from 'react';
 import MenuListItemDetail from './menuListItemDetail';
 
-const MenuListItem = ({ data }) => {
-
-  return (
-    <div>
-      <h1>{data.name}</h1>
-      {data.categories.map((cat, i) => <MenuListItemDetail key={i} data={cat} />)}
-    </div>
-  )
-}
+const MenuListItem = ({ data }) => (
+  <div>
+    <h1>{data.name}</h1>
+    {data.categories.map(cat => <MenuListItemDetail key={cat.name} data={cat} />)}
+  </div>
+);
 
 export default MenuListItem;
 

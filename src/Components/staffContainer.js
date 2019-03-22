@@ -10,8 +10,8 @@ class StaffContainer extends Component {
   state = {
     name: '',
     email: '',
-    staffData: this.props.data,
-    newStaffMember: null,
+    // staffData: this.props.data,
+    // newStaffMember: null,
   }
 
   onChangeName = (e) => {
@@ -39,11 +39,12 @@ class StaffContainer extends Component {
       },
       body: JSON.stringify({ name, email }),
     })
-      .then(response => response.json())
-      .then((response) => {
-        const updatedStaff = response.bars.find(bar => bar._id === this.props.barId).staff;
-        this.setState({ staffData: updatedStaff });
-      });
+      .then(response => response.json());
+    // .then((response) => {
+    // const updatedStaff = response.bars.find(bar => bar._id === this.props.barId).staff;
+    // this.setState({ staffData: updatedStaff });
+    // });
+    return 0;
   }
 
   render() {
@@ -52,7 +53,9 @@ class StaffContainer extends Component {
     return (
       <div className="staffContainer">
 
-        {this.props.data ? this.props.data.map((staff, i) => <StaffContainerItem data={staff} key={i} />) : null}
+        {this.props.data
+          ? this.props.data.map(staff => <StaffContainerItem data={staff} key={staff.name} />)
+          : null}
 
         <form>
           <input type="text" placeholder="Name" onChange={this.onChangeName} />
