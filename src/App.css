@@ -1,3 +1,13 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+
+.App {
+  font-family: Montserrat;
+  font-size: 12px;
+  background-color: #f1e4c7;
+  padding: 20px;
+  color: #2F3330;
+}
+
 .staffContainer {
   background-color:lightgreen;
   padding: 50px;
@@ -5,27 +15,27 @@
 }
 
 .menuContainer {
-  background-color:lightsalmon;
-  padding: 50px;
+  background-color: #f1e4c7;
+  padding: 20px;
   flex: 3;
 }
 
 .dashboard {
   display: flex;
-  background-color: lightblue;
-  padding: 20px;
+  background-color: #c80d36;
+  padding: 6px;
 }
 
 .barList {
-  background-color: yellow;
+  background-color: #f1e4c7;
   padding: 20px;
   flex: 1;
-  flex-direction: vertical; 
+  flex-direction: vertical;
 }
 
 .barDetails {
-  background-color: pink;
-  padding: 20px;
+  background-color: #c80d36;
+  padding-left: 6px;
   flex: 3;
 }
 
@@ -47,3 +57,15 @@
   font-style: italic;
 }
 
+.menuListItem {
+  background-color: white;
+}
+
+h1 {
+  color: #c80d36
+}
+
+h2 {
+  color: #5E0035;
+  font-weight: bold;
+}

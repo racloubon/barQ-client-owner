@@ -4,8 +4,8 @@ const MenuListItemDetail = ({ data }) => {
 
   return (
     <div>
-      <h2>{data.name}</h2>
-      {data.items ? data.items.map((item, i) => <div key={i}><h3>{item.name}: ${item.price}</h3></div>) : null}
+      <h3>{data.name}</h3>
+      {data.items ? data.items.map((item, i) => <div key={i}><p>{item.name}: ${item.price}</p></div>) : null}
     </div>
   )
 }

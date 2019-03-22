@@ -38,6 +38,7 @@ class MenuContainer extends React.Component {
       alert('Error: Please ensure that you submit a csv file.'); // eslint-disable-line no-alert
       return 1;
     }
+    console.log('You are uploading: ', file.name)
     const reader = new FileReader();
     reader.onload = () => {
       const binaryStr = reader.result;
@@ -54,8 +55,7 @@ class MenuContainer extends React.Component {
     return 0;
   }
 
-  onConfirm = (e) => {
-    e.preventDefault();
+  onConfirm = async (e) => {
     const { json, menuName } = this.state;
     if (json.length < 1 || menuName.length < 1) {
       alert('Error: Please ensure that you submit both a menu and name.'); // eslint-disable-line no-alert
@@ -86,6 +86,8 @@ class MenuContainer extends React.Component {
 
     return (
       <div className="menuContainer">
+
+      <h1>Menus</h1>
 
       {this.props.data ? this.props.data.map((item, i) => <MenuListItem key={i} data={item} deleteMenu={this.props.deleteMenu} barId={this.props.barId}/>) : null}
 
