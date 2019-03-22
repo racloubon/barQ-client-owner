@@ -7,7 +7,7 @@ const BarListItem = ({ barData, deleteBar, selectBar }) => {
       <h2>{barData.name}</h2>
       <p>{barData._id}</p>
       <button onClick={() => deleteBar(barData._id)}>Delete Bar</button>
-      <button onClick={() => selectBar(barData.menus)}>Select Bar</button>
+      <button onClick={() => selectBar(barData)}>Select Bar</button>
     </div>
   )
 }

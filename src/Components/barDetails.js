@@ -9,9 +9,9 @@ class BarDetails extends Component {
     return (
       <div className="barDetails">
         <div>Menu Container</div>
-        <MenuContainer data={this.props.data} />
+        <MenuContainer data={this.props.data.menus} barId={this.props.data._id} />
         <div>Staff Container</div>
-        <StaffContainer data={this.props.data} />
+        <StaffContainer data={this.props.data.staff} barId={this.props.data._id} />
       </div>
     );
   }

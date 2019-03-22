@@ -60,8 +60,8 @@ class Dashboard extends Component {
       })
   }
 
-  selectBar = (menus) => {
-    this.setState({activeBar: menus})
+  selectBar = (barData) => {
+    this.setState({activeBar: barData})
   }
 
   componentDidMount = () => {
@@ -69,10 +69,11 @@ class Dashboard extends Component {
   }
 
   render() {
+    console.log('dashboard rerendering')
     return (
       <div className="dashboard">
-        <BarList data={this.state.ownerData} addBar={this.addBar} deleteBar={this.deleteBar} selectBar={this.selectBar}/>
-        <BarDetails data={this.state.activeBar} />
+        <BarList data={this.state.ownerData} addBar={this.addBar} deleteBar={this.deleteBar} selectBar={this.selectBar} />
+        {this.state.activeBar ? <BarDetails data={this.state.activeBar} /> : null}
       </div>
     );
   }

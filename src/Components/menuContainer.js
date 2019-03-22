@@ -22,6 +22,7 @@ class MenuContainer extends React.Component {
     file: null,
     json: [],
     menuName: '',
+    barData: this.props.data,
   }
 
   onChangeName = (e) => {
@@ -100,12 +101,14 @@ class MenuContainer extends React.Component {
 
   render() {
 
+
+
     const { json } = this.state;
 
     return (
       <div className="menuContainer">
 
-      {this.props.data ? this.props.data.map((item, i) => <MenuListItem key={i} data={item}/>) : null}
+      {this.state.barData ? this.state.barData.map((item, i) => <MenuListItem key={i} data={item}/>) : null}
 
         <form>
           <input type="text" placeholder="Name" onChange={this.onChangeName} />

@@ -2,8 +2,6 @@ import React from 'react';
 
 const MenuListItemDetail = ({ data }) => {
 
-console.log(data)
-
   return (
     <div>
       <h2>{data.name}</h2>
